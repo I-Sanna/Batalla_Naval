@@ -1,3 +1,5 @@
+
+
 class Celda:
     
     def __init__(self):
@@ -16,3 +18,9 @@ class Celda:
     def eliminar_barco(self):
         if self.barco != None:
             self.barco = None
+    
+    def verificar_celda(self):
+        if self.barco == None:
+            return False
+        else:
+            return True
