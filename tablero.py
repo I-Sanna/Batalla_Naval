@@ -5,42 +5,14 @@ from barco import Barco
 class Tablero:
     """ clase tablero almacena las celdas y barcos """
 
-letras_a_numeros = {
-    "A" : 1,
-    "B" : 2,
-    "C" : 3,
-    "D" : 4,
-    "E" : 5,
-    "F" : 6,
-    "G" : 7,
-    "H" : 8,
-    "I" : 9,
-    "J" : 10,
-    "K" : 11,
-    "L" : 12,
-    "M" : 13,
-    "N" : 14,
-    "Ñ" : 15,
-    "O" : 16,
-    "P" : 17,
-    "Q" : 18,
-    "R" : 19,
-    "S" : 20,
-    "T" : 21,
-    "U" : 22,
-    "V" : 23,
-    "W" : 24,
-    "X" : 25,
-    "Y" : 26,
-    "Z" : 27
-}
+
 
     def __init__(self):
         self.ancho = None
         self.alto = None
         self.barcos = []
-        self.celdas =[[], []]
-        self.establecer_tamaño()
+        self.celdas =[]
+        self.establecer_tamaño(int(input("ancho  ")), int(input("alto  ")))
         self.crear_tablero() 
 
     def establecer_tamaño(self, ancho, alto):
@@ -48,9 +20,11 @@ letras_a_numeros = {
         self.alto = alto
 
     def crear_tablero(self):
-        for x in range (1, self.ancho + 1):
-            for y in range (1, self.alto + 1):
-                self.celdas[x][y].append(Celda())
+        for columna in range (1, self.ancho + 1):
+            lista = []
+            for fila in range (1, self.alto + 1):
+                lista.append(Celda())
+            self.celdas.append(lista)          
 
     def colocar_barco(self, posicion_x, posicion_y):
         self.celdas[posicion_x][posicion_y].posicionar_barco()
