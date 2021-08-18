@@ -48,7 +48,7 @@ letras_a_numeros = {
     def crear_tablero(self):
         for x in range (1, self.ancho + 1):
             for y in range (1, self.alto + 1):
-                self.celdas[x][y] = Celda()
+                self.celdas[x][y].append(Celda())
 
     def colocar_barco(self, posicion_x, posicion_y):
         self.celdas[posicion_x][posicion_y].posicionar_barco()
@@ -73,6 +73,13 @@ letras_a_numeros = {
                 verificador = self.celdas[posicion_x][posicion_y].verificar_celda()
                 if not verificador :
                     self.celdas[posicion_x][posicion_y].posicionar_barco()
+                    self.barcos.append(Barco())
     
     def sacar_barco(self, posicion_x, posicion_y):
         self.celdas[posicion_x][posicion_y].eliminar_barco()
+    
+    def verificar_barcos():
+        if self.barcos == []:
+            return False
+        else: 
+            return True
