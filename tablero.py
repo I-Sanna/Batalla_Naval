@@ -16,8 +16,8 @@ class Tablero:
         self.crear_tablero() 
 
     def establecer_tamaño(self, ancho, alto):
-        self.ancho = ancho
-        self.alto = alto
+        self.ancho = int(ancho)
+        self.alto = int(alto)
 
     def crear_tablero(self):
         for columna in range (1, self.ancho + 1):
@@ -27,13 +27,15 @@ class Tablero:
             self.celdas.append(lista)          
 
     def colocar_barco(self, posicion_x, posicion_y):
-        self.celdas[posicion_x][posicion_y].posicionar_barco()
+        self.barcos.append(self.celdas[posicion_y][posicion_x].posicionar_barco())
 
     def lanzar(self, posicion_x, posicion_y):
-        resultado = self.celdas[posicion_x][posicion_y].atacar()
+        resultado, barco = self.celdas[posicion_y][posicion_x].atacar()
         if resultado:
             print ("Hundido!!!")
-        print ("Agua")
+            self.barcos.remove(barco)
+        else:
+            print ("Agua")
     
     def limpiar_tablero(self):
         for x in range (self.ancho):
@@ -46,15 +48,16 @@ class Tablero:
             while verificador:
                 posicion_x = random.randrange(1, self.ancho + 1)
                 posicion_y = random.randrange(1, self.alto + 1)
-                verificador = self.celdas[posicion_x][posicion_y].verificar_celda()
+                verificador = self.celdas[posicion_y][posicion_x].verificar_celda()
                 if not verificador :
-                    self.celdas[posicion_x][posicion_y].posicionar_barco()
-                    self.barcos.append(Barco())
+                    self.colocar_barco(posicion_x, posicion_y)
     
     def sacar_barco(self, posicion_x, posicion_y):
-        self.celdas[posicion_x][posicion_y].eliminar_barco()
+        barco = self.celdas[posicion_y][posicion_x].eliminar_barco()
+        self.barcos.remove(barco)
     
     def verificar_barcos():
+        print (self.Barcos)
         if self.barcos == []:
             return False
         else: 

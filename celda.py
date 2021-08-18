@@ -7,17 +7,20 @@ class Celda:
 
     def posicionar_barco(self):
         self.barco = Barco()
+        return self.barco
 
     def atacar(self):
         if self.barco != None:
             self.barco.hundir()
-            self.barco = None
-            return True
+            barco = eliminar_barco()
+            return True, barco
         return False
 
     def eliminar_barco(self):
         if self.barco != None:
+            barco = self.barco
             self.barco = None
+            return barco
     
     def verificar_celda(self):
         if self.barco == None:
