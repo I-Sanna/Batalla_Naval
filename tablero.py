@@ -1,6 +1,8 @@
 import random
+from celda import Celda
+from barco import Barco
 
-class tablero:
+class Tablero:
     """ clase tablero almacena las celdas y barcos """
 
 letras_a_numeros = {
@@ -33,7 +35,7 @@ letras_a_numeros = {
     "Z" : 27
 }
 
-    def __inti__(self):
+    def __init__(self):
         self.ancho = None
         self.alto = None
         self.barcos = []

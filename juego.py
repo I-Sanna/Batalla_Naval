@@ -1,3 +1,5 @@
+from tablero import Tablero
+
 class Juego:
 
     def __init__(self):
