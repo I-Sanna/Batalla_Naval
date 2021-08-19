@@ -4,6 +4,7 @@ class Juego:
 
     def __init__(self):
         self.turno = None
+        self.jugadores = []
 
 letras_a_numeros = {
     "A" : 1,

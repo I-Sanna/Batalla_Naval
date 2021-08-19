@@ -12,9 +12,9 @@ class Celda:
     def atacar(self):
         if self.barco != None:
             self.barco.hundir()
-            barco = eliminar_barco()
+            barco = self.eliminar_barco()
             return True, barco
-        return False
+        return False, None
 
     def eliminar_barco(self):
         if self.barco != None:
