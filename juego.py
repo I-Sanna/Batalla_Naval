@@ -6,7 +6,7 @@ class Juego:
         self.turno = None
         self.jugadores = []
 
-letras_a_numeros = {
+    letras_a_numeros = {
     "A" : 1,
     "B" : 2,
     "C" : 3,
@@ -34,9 +34,9 @@ letras_a_numeros = {
     "X" : 25,
     "Y" : 26,
     "Z" : 27
-}
+    }
 
-    def cambiar_tuno():
+    def cambiar_turno(self):
         self.turno = True
         while verificar_barcos():
             if self.turno:

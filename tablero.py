@@ -1,6 +1,6 @@
 import random
 from celda import Celda
-
+from barco import Barco
 
 class Tablero:
     """ clase tablero almacena las celdas y barcos """
@@ -40,10 +40,9 @@ class Tablero:
     def limpiar_tablero(self):
         for x in range (self.ancho):
             for y in range (self.alto):
-                sacar_barco(x, y)
+                self.sacar_barco(x, y)
             
-    def aleatoriezar_barcos(self):
-        limpiar_tablero()
+    def aleatorizar_barcos(self):
         for x in range (1, 9):
             verificador = True
             while verificador:
@@ -57,15 +56,14 @@ class Tablero:
         verificador = self.celdas[posicion_y][posicion_x].verificar_celda()
         if verificador:
             barco = self.celdas[posicion_y - 1][posicion_x - 1].eliminar_barco()
-            self.barcos.remove(barco)
-            return "barco eliminado exitosamente"
+            if self.barcos != []
+                self.barcos.remove(barco)
+                return "barco eliminado exitosamente"
         else:
             return "no hay un barco en la celda"
     
     def verificar_barcos(self):
         if self.barcos == []:
-            print ("no hay barcos")
-            return False
+            return "no hay barcos"           
         else: 
-            print ("hay barcos")
-            return True
+            return "hay barcos"
