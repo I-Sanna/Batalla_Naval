@@ -21,6 +21,7 @@ class Celda:
             barco = self.barco
             self.barco = None
             return barco
+        return None
     
     def verificar_celda(self):
         if self.barco == None:
