@@ -2,10 +2,11 @@ from tablero import Tablero
 
 class Jugador: 
     
-    def __init__(self, ancho, alto):
-        self.nombre = None
+    def __init__(self, ancho, alto, orden):
+        self.nombre = ""
         self.ancho_tablero = ancho
         self.alto_tablero = alto
+        self.identificarse(orden)
         self.tablero = Tablero(ancho, alto)
     
     def barcos_randoms(self):
@@ -22,7 +23,7 @@ class Jugador:
                 except:
                     print ("La fila ingresada no existe.")
                     continue
-                if posicion_x.isnumeric() and posicion_x =< self.ancho_tablero and posicion_x != 0 and posicion_y =< self.alto_tablero:
+                if posicion_x.isnumeric() and posicion_x <= self.ancho_tablero and posicion_x != 0 and posicion_y <= self.alto_tablero:
                     verificador = True
                 else:
                     print("La columna ingresada no existe")
@@ -30,23 +31,29 @@ class Jugador:
         
     def atacar(self):
         verificador = False
-            while not verificador:
-                posicion_x = input("Ingrese la columna(1, 2, 3...): ")
-                posicion_y = input("Ingrese la fila(A, B, C...): ")
-                try:
-                    posicion_y = letras_a_numeros[posicion_y.upper]
-                except:
-                    print ("La fila ingresada no existe.")
-                    continue
-                if posicion_x.isnumeric() and posicion_x =< self.ancho_tablero and posicion_x != 0 and posicion_y =< self.alto_tablero:
-                    verificador = True
-                else:
-                    print("La columna ingresada no existe")
-            self.tablero.lanzar(int(posicion_x) - 1, posicion_y - 1)
-            hay_barcos = self.tablero.verificar_barcos()
-            return hay_barcos
+        while not verificador:
+            posicion_x = input("Ingrese la columna(1, 2, 3...): ")
+            posicion_y = input("Ingrese la fila(A, B, C...): ")
+            try:
+                posicion_y = letras_a_numeros[posicion_y.upper()]
+            except:
+                print ("La fila ingresada no existe.")
+                continue
+            if posicion_x.isnumeric() and posicion_x <= self.ancho_tablero and posicion_x != 0 and posicion_y <= self.alto_tablero:
+                verificador = True
+            else:
+                print("La columna ingresada no existe")
+        self.tablero.lanzar(int(posicion_x) - 1, posicion_y - 1)
+        hay_barcos = self.tablero.verificar_barcos()
+        return hay_barcos
 
-    
+    def identificarse(self, orden):
+        if int(orden) == 1:
+            self.nombre = input("ingresen el nombre del primer jugador   ")
+        else:
+            self.nombre = input("ingresen el nombre del segundo jugador   ")
+
+
     letras_a_numeros = {
     "A" : 1,
     "B" : 2,
