@@ -6,17 +6,17 @@ class Tablero:
 
 
 
-    def __init__(self):
+    def __init__(self, ancho, alto):
         self.ancho = None
         self.alto = None
         self.barcos = []
         self.celdas =[]
-        self.establecer_tamaño(int(input("ancho  ")), int(input("alto  ")))
+        self.establecer_tamaño(ancho, alto)
         self.crear_tablero() 
 
     def establecer_tamaño(self, ancho, alto):
-        self.ancho = int(ancho)
-        self.alto = int(alto)
+        self.ancho = ancho
+        self.alto = alto
 
     def crear_tablero(self):
         for columna in range (0, self.ancho):
@@ -39,7 +39,7 @@ class Tablero:
     
     def limpiar_tablero(self):
         for x in range (1, self.ancho + 1):
-            for y in range (1, self.alto + 1):
+            for y in range (self.alto + 1):
                 print(self.sacar_barco(x, y))
             
     def aleatorizar_barcos(self):
