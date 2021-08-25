@@ -26,11 +26,11 @@ class Tablero:
             self.celdas.append(lista)          
 
     def colocar_barco(self, posicion_x, posicion_y):
-        barco = self.celdas[posicion_y - 1][posicion_x - 1].posicionar_barco()
+        barco = self.celdas[posicion_y][posicion_x].posicionar_barco()
         self.barcos.append(barco)
 
     def lanzar(self, posicion_x, posicion_y):
-        resultado, barco = self.celdas[posicion_y - 1][posicion_x - 1].atacar()
+        resultado, barco = self.celdas[posicion_y][posicion_x].atacar()
         if resultado:
             print ("Hundido!!!")
             self.barcos.remove(barco)
@@ -50,19 +50,19 @@ class Tablero:
                 posicion_y = random.randrange(0, self.ancho)
                 verificador = self.celdas[posicion_y][posicion_x].verificar_celda()
                 if not verificador :
-                    self.colocar_barco(posicion_x + 1, posicion_y + 1)
+                    self.colocar_barco(posicion_x, posicion_y)
     
     def sacar_barco(self, posicion_x, posicion_y):
         verificador = self.celdas[posicion_y - 1][posicion_x - 1].verificar_celda()
         if verificador:
             barco = self.celdas[posicion_y - 1][posicion_x - 1].eliminar_barco()
             self.barcos.remove(barco)
-            return "barco eliminado exitosamente"
+            print ("barco eliminado exitosamente")
         else:
-            return "no hay un barco en la celda"
+            print ("no hay un barco en la celda")
     
     def verificar_barcos(self):
         if self.barcos == []:
-            return "no hay barcos"           
+            return False          
         else: 
-            return "hay barcos"
+            return True
