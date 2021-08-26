@@ -34,8 +34,10 @@ class Tablero:
         if resultado:
             print ("Hundido!!!")
             self.barcos.remove(barco)
+            return True
         else:
             print ("Agua")
+            return False
     
     def limpiar_tablero(self):
         for x in range (1, self.ancho + 1):

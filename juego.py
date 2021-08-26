@@ -5,6 +5,8 @@ class Juego:
     def __init__(self):
         self.jugador1 = None
         self.jugador2 = None
+        self.punto_j1 = 0
+        self.punto_j2 = 0
         self.juego_nuevo()
         self.cambiar_turno()
 
@@ -47,20 +49,26 @@ class Juego:
 
     def cambiar_turno(self):
         while True:
-            print("Turno jugador1")
-            termino = self.jugador2.atacar()
+            print("Turno de " + self.jugador1.nombre + "    Barcos enemigos hundidos: " + str(self.punto_j1))
+            termino, punto = self.jugador2.atacar()
+            if punto:
+                self.punto_j1 += 1
+                print (str(self.punto_j1) + " punto/s") 
             if not termino:
-                print ("El jugador 1 ha ganado")
+                print ( self.jugador2.nombre + " ha ganado" )
                 break
-            print ("Turno jugador2")
-            termino = self.jugador1.atacar()
+            print ("Turno de " + self.jugador2.nombre + "    Barcos enemigos hundidos: " + str(self.punto_j2))
+            termino, punto = self.jugador1.atacar()
+            if punto:
+                self.punto_j2 += 1
+                print (str(self.punto_j2) + " punto/s")
             if not termino:
-                print ("El jugador 2 ha ganado")
+                print ( self.jugador2.nombre + " ha ganado")
                 break
         while True:
             respuesta = input("Desea empezar un juego nuevo? (y/n)")
-            if respuesta.lower in ('y', 'n'):
-                if respuesta.lower == 'y':
+            if respuesta.lower() in ('y', 'n'):
+                if respuesta.lower() == 'y':
                     self.juego_nuevo()
                     break
                 else:
