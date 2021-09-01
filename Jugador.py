@@ -1,8 +1,10 @@
 from tablero import Tablero
 
 class Jugador: 
-    
+    """ clase jugador realiza las solicitudes de datos """
+
     def __init__(self, ancho, alto, orden):
+        """ constructor de la clase """
         self.nombre = ""
         self.ancho_tablero = int(ancho)
         self.alto_tablero = int(alto)
@@ -10,58 +12,83 @@ class Jugador:
         self.tablero = Tablero(ancho, alto)
     
     def barcos_randoms(self):
+        """ lleva el mensaje, de colocar barcos al azar, a el tablero  """
         self.tablero.aleatorizar_barcos()
 
     def colocar_barcos(self):
+        """ colocar barcos a peticion del jugador en el tablero  """
         for x in range(8):
             verificador = False
             while not verificador:
+                
+                # solicita y verifica la columna
                 try:
                     posicion_x = input("Ingrese la columna(1, 2, 3...): ")
                 except:
                     print("ingrese un valor numerico")
                     continue
+                
+                # solicita y traduce la fila 
                 posicion_y = input("Ingrese la fila(A, B, C...): ")
                 try:
                     posicion_y = letras_a_numeros[posicion_y.upper()]
                 except:
                     print ("La fila ingresada no existe.")
                     continue
+                
+                # revisa que las coordenadas no esten fuera de los limites
                 if posicion_x <= self.ancho_tablero and posicion_x != 0 and posicion_y <= self.alto_tablero:
                     verificador = True
                 else:
                     print("La columna ingresada no existe")
+
             self.tablero.colocar_barco(posicion_y - 1, posicion_x - 1)
         
     def atacar(self):
+        """ solicita al jugador las coordenasa y "ataca" la celda solicitada """
         verificador = False
         while not verificador:
+
+            # solicita y verifica la columna a atacar
             try:
                 posicion_x = int(input("Ingrese la columna(1, 2, 3...): "))
             except:
                 print("ingrese un valor numerico")
                 continue
+            
+            # solicita y traduce la fila a atacar
             posicion_y = input("Ingrese la fila(A, B, C...): ")
             try:
                 posicion_y = letras_a_numeros[posicion_y.upper()]
             except:
                 print ("La fila ingresada no existe.")
                 continue
+            
+            # revisa que las coordenadas no esten fuera de los limites
             if posicion_x <= self.ancho_tablero and posicion_x != 0 and posicion_y <= self.alto_tablero:
                 verificador = True
             else:
                 print("La columna ingresada no existe")
-        punto = self.tablero.lanzar(posicion_y - 1, posicion_x - 1)
-        hay_barcos = self.tablero.verificar_barcos()
-        return hay_barcos, punto
+
+            # revisa que la celda no fue atacada previmente
+            if self.tablero.revisar_ataque(posicion_y - 1, posicion_x - 1):
+                punto = self.tablero.lanzar(posicion_y - 1, posicion_x - 1)
+                hay_barcos = self.tablero.verificar_barcos()
+                return hay_barcos, punto
+            else:
+                verificador = False
+                print ("esta celda ya fue atacada")
 
     def identificarse(self, orden):
+        """ define los nombres de los jugadores """
         if int(orden) == 1:
             self.nombre = input("ingresen el nombre del primer jugador   ")
         else:
             self.nombre = input("ingresen el nombre del segundo jugador   ")
 
+
 letras_a_numeros = {
+    """ traduce las letras que el jugador ingrese en numeros para el programa """
     "A" : 1,
     "B" : 2,
     "C" : 3,
