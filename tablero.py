@@ -29,7 +29,7 @@ class Tablero:
     def colocar_barco(self, posicion_x, posicion_y):
         """ coloca barcos en las celdas del tablero """
         verificador = self.celdas[posicion_y - 1][posicion_x - 1].verificar_celda()
-        if verificador:
+        if not verificador:
             barco = self.celdas[posicion_y][posicion_x].posicionar_barco()
             self.barcos.append(barco)
             return True

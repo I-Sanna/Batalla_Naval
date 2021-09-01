@@ -39,12 +39,10 @@ class Jugador:
                 
                 # revisa que las coordenadas no esten fuera de los limites
                 if posicion_x <= self.ancho_tablero and posicion_x != 0 and posicion_y <= self.alto_tablero:
-                    verificador = True
+                    verificador = self.tablero.colocar_barco(posicion_y - 1, posicion_x - 1)
                 else:
                     print("La columna ingresada no existe")
-                    
-                # verifica la celda y coloca el barco 
-                verificador = self.tablero.colocar_barco(posicion_y - 1, posicion_x - 1)                 
+                
         
     def atacar(self):
         """ solicita al jugador las coordenasa y "ataca" la celda solicitada """
