@@ -28,8 +28,13 @@ class Tablero:
 
     def colocar_barco(self, posicion_x, posicion_y):
         """ coloca barcos en las celdas del tablero """
-        barco = self.celdas[posicion_y][posicion_x].posicionar_barco()
-        self.barcos.append(barco)
+        verificador = self.celdas[posicion_y - 1][posicion_x - 1].verificar_celda()
+        if verificador:
+            barco = self.celdas[posicion_y][posicion_x].posicionar_barco()
+            self.barcos.append(barco)
+            return True
+        else:
+            return False
 
     def lanzar(self, posicion_x, posicion_y):
         """ "ataca" y indica si se golpeo algo """

@@ -14,6 +14,7 @@ class Juego:
 
     def juego_nuevo(self):
         """ crea una nueva partida o juego """
+
         verificador = False
         while not verificador:
             ancho = input("Decidan, el ancho de los tableros: ")

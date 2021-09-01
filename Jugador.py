@@ -18,12 +18,13 @@ class Jugador:
     def colocar_barcos(self):
         """ colocar barcos a peticion del jugador en el tablero  """
         for x in range(8):
+            print("barco numero" + str(x + 1) + "/8") 
             verificador = False
             while not verificador:
-                
+
                 # solicita y verifica la columna
                 try:
-                    posicion_x = input("Ingrese la columna(1, 2, 3...): ")
+                    posicion_x = int(input("Ingrese la columna(1, 2, 3...): "))
                 except:
                     print("ingrese un valor numerico")
                     continue
@@ -41,8 +42,9 @@ class Jugador:
                     verificador = True
                 else:
                     print("La columna ingresada no existe")
-
-            self.tablero.colocar_barco(posicion_y - 1, posicion_x - 1)
+                    
+                # verifica la celda y coloca el barco 
+                verificador = self.tablero.colocar_barco(posicion_y - 1, posicion_x - 1)                 
         
     def atacar(self):
         """ solicita al jugador las coordenasa y "ataca" la celda solicitada """
@@ -88,7 +90,6 @@ class Jugador:
 
 
 letras_a_numeros = {
-    """ traduce las letras que el jugador ingrese en numeros para el programa """
     "A" : 1,
     "B" : 2,
     "C" : 3,
