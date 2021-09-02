@@ -17,20 +17,29 @@ class Juego:
 
         verificador = False
         while not verificador:
-            ancho = input("Decidan, el ancho de los tableros: ")
-            alto = input("Decidan, el alto de los tableros: ")
+            
+            #solicita y verifica los datos para crear los tableros
+            try:
+                ancho = int(input("Decidan, el ancho de los tableros: "))
+                alto = int(input("Decidan, el alto de los tableros: "))
+            except:
+                print("ingrese valores numericos")
+                continue
+            
 
-            # comprueba los datos solicitados para crear los tableros
-            if ancho.isnumeric() and alto.isnumeric() and int(ancho) < 28 and int(alto) < 28 and int(alto) * int(ancho) > 7 :
+            # comprueba el tamaño indicado
+            if ancho < 28 and alto < 28 and alto * ancho > 7 :
                 verificador = True
-                ancho = int(ancho)
-                alto = int(alto)
             else:
-                print("el minimo del tablero es 7 casillas (4*2, 2*4 o 3*3)")
+                if alto * ancho < 8:
+                    print("el minimo del tablero es 8 casillas (4*2, 2*4 o 3*3)")
+                elif int(alto) * int(ancho) > 729:
+                    print("el maximo del tablero es 729 casillas (27*27)")
+                
+
         
-        # crea los objeto jugador 1 y 2
+        # crea el objeto jugador 1 
         self.jugador1 = Jugador(ancho, alto, 1)
-        self.jugador2 = Jugador(ancho, alto, 2)
 
         # comprueba la respuesta del jugador 1, respecto a colocar barcos
         while True:
@@ -38,12 +47,20 @@ class Juego:
             if respuesta.lower() in ("y", "n"):
                 if respuesta == "y":
                     self.jugador1.colocar_barcos()
+                    for i in range(10):
+                        print (
+
+                            "Cargando"
+                            )
                     break
                 else:
                     self.jugador1.barcos_randoms()
                     break
             else:
                 print ("Ingrese un respuesta valida porfavor")
+        
+        # crea le objeto jugador 2
+        self.jugador2 = Jugador(ancho, alto, 2)
 
         # comprueba la respuesta del jugador 2, respecto a colocar barcos
         while True:
@@ -68,7 +85,7 @@ class Juego:
                 self.punto_j1 += 1
                 print (str(self.punto_j1) + " punto/s") 
             if not termino:
-                print ( self.jugador2.nombre + " ha ganado" )
+                print ( self.jugador1.nombre + " ha ganado" )
                 break
             print ("Turno de " + self.jugador2.nombre + "    Barcos enemigos hundidos: " + str(self.punto_j2))
             termino, punto = self.jugador1.atacar()
@@ -81,12 +98,14 @@ class Juego:
         
         # comprueba la respuesta de los jugadores, respecto a empezar un nuevo juego
         while True:
-            respuesta = input("Desea empezar un juego nuevo? (y/n)")
+            respuesta = input("Desea empezar un juego nuevo? (y/n)      ")
             if respuesta.lower() in ('y', 'n'):
                 if respuesta.lower() == 'y':
                     self.juego_nuevo()
                     break
                 else:
                     break
+            else:
+                print("ingrese una respuesta valida")
                 
 j = Juego()

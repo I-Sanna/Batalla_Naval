@@ -20,6 +20,7 @@ class Celda:
             barco = self.eliminar_barco()
             self.atacada = True
             return True, barco
+        self.atacada = True
         return False, None
 
     def eliminar_barco(self):

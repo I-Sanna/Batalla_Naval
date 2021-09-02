@@ -40,6 +40,8 @@ class Jugador:
                 # revisa que las coordenadas no esten fuera de los limites
                 if posicion_x <= self.ancho_tablero and posicion_x != 0 and posicion_y <= self.alto_tablero:
                     verificador = self.tablero.colocar_barco(posicion_y - 1, posicion_x - 1)
+                    if not verificador:
+                        print("La casilla esta ocupada")
                 else:
                     print("La columna ingresada no existe")
                 
@@ -66,18 +68,19 @@ class Jugador:
             
             # revisa que las coordenadas no esten fuera de los limites
             if posicion_x <= self.ancho_tablero and posicion_x != 0 and posicion_y <= self.alto_tablero:
-                verificador = True
+                if self.tablero.revisar_ataque(posicion_y - 1, posicion_x - 1):
+                    punto = self.tablero.lanzar(posicion_y - 1, posicion_x - 1)
+                    hay_barcos = self.tablero.verificar_barcos()
+                    verificador = True
+                    return hay_barcos, punto
+                else:
+                    verificador = False
+                    print ("esta celda ya fue atacada")
             else:
                 print("La columna ingresada no existe")
 
             # revisa que la celda no fue atacada previmente
-            if self.tablero.revisar_ataque(posicion_y - 1, posicion_x - 1):
-                punto = self.tablero.lanzar(posicion_y - 1, posicion_x - 1)
-                hay_barcos = self.tablero.verificar_barcos()
-                return hay_barcos, punto
-            else:
-                verificador = False
-                print ("esta celda ya fue atacada")
+            
 
     def identificarse(self, orden):
         """ define los nombres de los jugadores """
